@@ -1,4 +1,6 @@
 # Prerequisites
 .vs
-AlgorithmCollection\bin
-AlgorithmCollection\obj
+AlgorithmCollection/bin/
+AlgorithmCollection/obj/
+FolderProfile.pubxml
+FolderProfile.pubxml.user
