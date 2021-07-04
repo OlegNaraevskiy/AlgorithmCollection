@@ -1,6 +1,6 @@
 # Prerequisites
 .vs
-AlgorithmCollection/bin/
-AlgorithmCollection/obj/
+*/bin/
+*/obj/
 FolderProfile.pubxml
 FolderProfile.pubxml.user
