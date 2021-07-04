@@ -1,0 +1,13 @@
+E:\Projects\AlgorithmCollection\AlgorithmCollection\AlgorithmCollection\bin\Debug\netcoreapp3.1\AlgorithmCollection.exe
+E:\Projects\AlgorithmCollection\AlgorithmCollection\AlgorithmCollection\bin\Debug\netcoreapp3.1\AlgorithmCollection.deps.json
+E:\Projects\AlgorithmCollection\AlgorithmCollection\AlgorithmCollection\bin\Debug\netcoreapp3.1\AlgorithmCollection.runtimeconfig.json
+E:\Projects\AlgorithmCollection\AlgorithmCollection\AlgorithmCollection\bin\Debug\netcoreapp3.1\AlgorithmCollection.runtimeconfig.dev.json
+E:\Projects\AlgorithmCollection\AlgorithmCollection\AlgorithmCollection\bin\Debug\netcoreapp3.1\AlgorithmCollection.dll
+E:\Projects\AlgorithmCollection\AlgorithmCollection\AlgorithmCollection\bin\Debug\netcoreapp3.1\AlgorithmCollection.pdb
+E:\Projects\AlgorithmCollection\AlgorithmCollection\AlgorithmCollection\obj\Debug\netcoreapp3.1\AlgorithmCollection.csprojAssemblyReference.cache
+E:\Projects\AlgorithmCollection\AlgorithmCollection\AlgorithmCollection\obj\Debug\netcoreapp3.1\AlgorithmCollection.AssemblyInfoInputs.cache
+E:\Projects\AlgorithmCollection\AlgorithmCollection\AlgorithmCollection\obj\Debug\netcoreapp3.1\AlgorithmCollection.AssemblyInfo.cs
+E:\Projects\AlgorithmCollection\AlgorithmCollection\AlgorithmCollection\obj\Debug\netcoreapp3.1\AlgorithmCollection.csproj.CoreCompileInputs.cache
+E:\Projects\AlgorithmCollection\AlgorithmCollection\AlgorithmCollection\obj\Debug\netcoreapp3.1\AlgorithmCollection.dll
+E:\Projects\AlgorithmCollection\AlgorithmCollection\AlgorithmCollection\obj\Debug\netcoreapp3.1\AlgorithmCollection.pdb
+E:\Projects\AlgorithmCollection\AlgorithmCollection\AlgorithmCollection\obj\Debug\netcoreapp3.1\AlgorithmCollection.genruntimeconfig.cache
