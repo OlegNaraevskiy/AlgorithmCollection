@@ -1,5 +1,5 @@
-﻿using System;
-using SortingAlgorithms;
+﻿using SortingAlgorithms;
+using System;
 
 namespace AlgorithmCollection
 {
@@ -7,20 +7,20 @@ namespace AlgorithmCollection
 	{
 		static void Main(string[] args)
 		{
-			int[] array = new int[100];
+			int[] array = new int[100000];
 
 			Random random = new Random();
 
 			for (int i = 0; i < array.Length; i++)
 			{
-				int rndInt = random.Next(1, 1000);
-				if (array[i] != rndInt)
-				{
-					array[i] = rndInt;
-				}
+				int rndInt = random.Next(1, 1000000);
+				
+				array[i] = rndInt;
 			}
 
-			var result = SelectionSorting.SortArray(array);
+			var result = SelectionSorting.SortAsc(array);
+
+			Console.WriteLine(String.Join(':', result));
 
 			Console.WriteLine("Hello World!");
 			Console.ReadKey();
