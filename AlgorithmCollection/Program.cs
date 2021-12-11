@@ -18,7 +18,7 @@ namespace AlgorithmCollection
 				array[i] = rndInt;
 			}
 
-			var result = SelectionSorting.SortAsc(array);
+			var result = SelectionSorting.SortAsc(new SortingAlgorithms.Classes.NumericArrays());
 
 			Console.WriteLine(String.Join(':', result));
 

@@ -1,5 +1,9 @@
-﻿using System;
-using System.Linq;
+﻿using SortingAlgorithms.Classes;
+using System;
+using System.ComponentModel;
+using System.Globalization;
+using System.Linq.Expressions;
+using System.Reflection;
 
 namespace SortingAlgorithms
 {
@@ -10,22 +14,38 @@ namespace SortingAlgorithms
 		/// </summary>
 		/// <param name="sourceArray">Исходный массив</param>
 		/// <returns>Отсортированный массив</returns>
-		public static int[] SortAsc(int[] sourceArray)
+		public static NumericArrays SortAsc(NumericArrays sourceArray)
 		{
-			int arrayLength = sourceArray.Length;
+			Type myType = Type.GetType("SortingAlgorithms.Classes.NumericArrays", false, true);
 
-			int[] sortArray = new int[arrayLength];
+			Console.WriteLine("Поля:");
 
-			for (int i = 0; i < arrayLength; i++)
+			sourceArray.ByteArray = new byte[] { 2, 1, 4, 3 };
+
+			foreach (var prop in myType.GetProperties())
 			{
-				int sIndex = FindSmallest(sourceArray);
+				Console.WriteLine($"{prop.Name} {prop.PropertyType}");
 
-				sortArray[i] = sourceArray[sIndex];
+				var propValue = prop.GetValue(sourceArray);
+				if (propValue != null)
+				{
+					Type tProp = prop.PropertyType;
+					//int arrayLength = propValue.Length;
 
-				sourceArray = sourceArray.RemoveAt(sIndex);
+					//T[] sortArray = new T[arrayLength];
+
+					//for (int i = 0; i < arrayLength; i++)
+					//{
+					//	int sIndex = FindSmallest(sourceArray);
+
+					//	sortArray[i] = sourceArray[sIndex];
+
+					//	sourceArray = sourceArray.RemoveAt(sIndex);
+					//}
+				}
 			}
 
-			return sortArray;
+			return new NumericArrays()/*sortArray*/;
 		}
 
 		/// <summary>
@@ -53,14 +73,12 @@ namespace SortingAlgorithms
 		/// </summary>
 		/// <param name="sourceArray">Входящий массив</param>
 		/// <returns>Индекс наименьшего элемента</returns>
-		private static int FindSmallest<T>(T[] sourceArray) where T: IComparable<T>
+		private static int FindSmallest<T>(T[] sourceArray) where T : IComparable
 		{
-			int arrayLength = sourceArray.Length;
-
 			int smallElementIndex = 0;
 			T smallestElement = sourceArray[smallElementIndex];
 
-			for (int i = 0; i < arrayLength; i++)
+			for (int i = 0; i < sourceArray.Length; i++)
 			{
 				T arrayElenent = sourceArray[i];
 
@@ -72,6 +90,39 @@ namespace SortingAlgorithms
 			}
 
 			return smallElementIndex;
+		}
+
+		/// <summary>
+		/// Sets a value in an object, used to hide all the logic that goes into
+		///     handling this sort of thing, so that is works elegantly in a single line.
+		/// </summary>
+		/// <param name="target"></param>
+		/// <param name="propertyName"></param>
+		/// <param name="propertyValue"></param>
+		private static void SetPropertyValue(this object target,
+									  string propertyName, string propertyValue, PropertyInfo oProp, NumericArrays sourceArray)
+		{
+			Type tProp = oProp.PropertyType;
+
+			//Nullable properties have to be treated differently, since we 
+			//  use their underlying property to set the value in the object
+			if (tProp.IsGenericType
+				&& tProp.GetGenericTypeDefinition().Equals(typeof(Nullable<>)))
+			{
+				var propValue = oProp.GetValue(sourceArray);
+				//if it's null, just set the value from the reserved word null, and return
+				if (propValue == null)
+				{
+					oProp.SetValue(target, null, null);
+					return;
+				}
+
+				//Get the underlying type property instead of the nullable generic
+				tProp = new NullableConverter(oProp.PropertyType).UnderlyingType;
+			}
+
+			//use the converter to get the correct value
+			oProp.SetValue(target, Convert.ChangeType(propertyValue, tProp), null);
 		}
 	}
 }
