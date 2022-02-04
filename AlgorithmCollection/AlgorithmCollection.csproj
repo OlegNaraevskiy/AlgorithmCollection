@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BinarySearchAlg\SearchAlgorithms.csproj" />
-    <ProjectReference Include="..\SortingAlgorithms\SortingAlgorithms.csproj" />
+    <ProjectReference Include="..\BinarySearchAlg\AlgorithmCollection.SearchAlgorithms.csproj" />
+    <ProjectReference Include="..\SortingAlgorithms\AlgorithmCollection.SortingAlgorithms.csproj" />
   </ItemGroup>
 
 </Project>
