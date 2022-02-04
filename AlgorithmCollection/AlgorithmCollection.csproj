@@ -5,4 +5,9 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BinarySearchAlg\AlgorithmCollection.SearchAlgorithms.csproj" />
+    <ProjectReference Include="..\SortingAlgorithms\AlgorithmCollection.SortingAlgorithms.csproj" />
+  </ItemGroup>
+
 </Project>
