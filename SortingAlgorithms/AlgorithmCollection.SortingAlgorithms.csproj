@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\NumericArrays.cs" />
+    <Compile Include="Emuns\SortingEnum.cs" />
     <Compile Include="SelectionSorting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

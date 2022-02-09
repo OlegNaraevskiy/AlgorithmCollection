@@ -4,74 +4,45 @@
  * Designed by: Oleg Naraevskiy / noa.oleg96@gmail.com      [02.2022]
  *===================================================================*/
 
+using SortingAlgorithms.Emuns;
 using SortingAlgorithms.Classes;
 using System;
-using System.ComponentModel;
-using System.Globalization;
-using System.Linq.Expressions;
-using System.Reflection;
+using System.Linq;
 
 namespace SortingAlgorithms
 {
 	public static class SelectionSorting
 	{
 		/// <summary>
-		/// Сортировка массива по возрастанию
+		/// Сортировка массива
 		/// </summary>
 		/// <param name="sourceArray">Исходный массив</param>
+		/// <param name="sortingMethod">Метод сортировки (по-умолчанию: по возрастанию)</param>
 		/// <returns>Отсортированный массив</returns>
-		public static NumericArrays SortAsc(NumericArrays sourceArray)
+		public static int[] Sort(int[] sourceArray, SortingEnum sortingMethod = SortingEnum.Ascending)
 		{
-			Type myType = Type.GetType("SortingAlgorithms.Classes.NumericArrays", false, true);
+			int sLength = sourceArray.Length;
+			int[] sortArray = new int[sLength];
 
-			Console.WriteLine("Поля:");
-
-			sourceArray.ByteArray = new byte[] { 2, 1, 4, 3 };
-
-			foreach (var prop in myType.GetProperties())
+			for (int i = 0; i < sLength; i++)
 			{
-				Console.WriteLine($"{prop.Name} {prop.PropertyType}");
+				int sIndex = 0;
 
-				var propValue = prop.GetValue(sourceArray);
-				if (propValue != null)
+				if (sortingMethod == SortingEnum.Ascending)
 				{
-					Type tProp = prop.PropertyType;
-					//int arrayLength = propValue.Length;
-
-					//T[] sortArray = new T[arrayLength];
-
-					//for (int i = 0; i < arrayLength; i++)
-					//{
-					//	int sIndex = FindSmallest(sourceArray);
-
-					//	sortArray[i] = sourceArray[sIndex];
-
-					//	sourceArray = sourceArray.RemoveAt(sIndex);
-					//}
+					sIndex = FindSmallest(sourceArray);
 				}
+				else if (sortingMethod == SortingEnum.Descending)
+				{
+					sIndex = FindBiggest(sourceArray);
+				}
+
+				sortArray[i] = sourceArray[sIndex];
+
+				sourceArray = sourceArray.RemoveAt(sIndex);
 			}
 
-			return new NumericArrays()/*sortArray*/;
-		}
-
-		/// <summary>
-		/// Удаление элемента из массива по индексу
-		/// </summary>
-		/// <typeparam name="T">Тип массима</typeparam>
-		/// <param name="source">Исходный массив</param>
-		/// <param name="index">Индекс удаляемого элемента</param>
-		/// <returns>Выходной массив</returns>
-		private static T[] RemoveAt<T>(this T[] source, int index)
-		{
-			T[] dest = new T[source.Length - 1];
-
-			if (index > 0)
-				Array.Copy(source, 0, dest, 0, index);
-
-			if (index < source.Length - 1)
-				Array.Copy(source, index + 1, dest, index, source.Length - index - 1);
-
-			return dest;
+			return sortArray;
 		}
 
 		/// <summary>
@@ -79,18 +50,18 @@ namespace SortingAlgorithms
 		/// </summary>
 		/// <param name="sourceArray">Входящий массив</param>
 		/// <returns>Индекс наименьшего элемента</returns>
-		private static int FindSmallest<T>(T[] sourceArray) where T : IComparable
+		private static int FindSmallest(int[] sourceArray)
 		{
 			int smallElementIndex = 0;
-			T smallestElement = sourceArray[smallElementIndex];
+			var smallestElement = sourceArray[smallElementIndex];
 
 			for (int i = 0; i < sourceArray.Length; i++)
 			{
-				T arrayElenent = sourceArray[i];
+				var arrayElement = sourceArray[i];
 
-				if (arrayElenent.CompareTo(smallestElement) < 0)
+				if (arrayElement < smallestElement)
 				{
-					smallestElement = sourceArray[i];
+					smallestElement = arrayElement;
 					smallElementIndex = i;
 				}
 			}
@@ -99,36 +70,43 @@ namespace SortingAlgorithms
 		}
 
 		/// <summary>
-		/// Sets a value in an object, used to hide all the logic that goes into
-		///     handling this sort of thing, so that is works elegantly in a single line.
+		/// Нахождение наибольшего значения
 		/// </summary>
-		/// <param name="target"></param>
-		/// <param name="propertyName"></param>
-		/// <param name="propertyValue"></param>
-		private static void SetPropertyValue(this object target,
-									  string propertyName, string propertyValue, PropertyInfo oProp, NumericArrays sourceArray)
+		/// <param name="sourceArray">Входящий массив</param>
+		/// <returns>Индекс наименьшего элемента</returns>
+		private static int FindBiggest(int[] sourceArray)
 		{
-			Type tProp = oProp.PropertyType;
+			int bigElementIndex = 0;
+			var biggestElement = sourceArray[bigElementIndex];
 
-			//Nullable properties have to be treated differently, since we 
-			//  use their underlying property to set the value in the object
-			if (tProp.IsGenericType
-				&& tProp.GetGenericTypeDefinition().Equals(typeof(Nullable<>)))
+			for (int i = 0; i < sourceArray.Length; i++)
 			{
-				var propValue = oProp.GetValue(sourceArray);
-				//if it's null, just set the value from the reserved word null, and return
-				if (propValue == null)
-				{
-					oProp.SetValue(target, null, null);
-					return;
-				}
+				var arrayElement = sourceArray[i];
 
-				//Get the underlying type property instead of the nullable generic
-				tProp = new NullableConverter(oProp.PropertyType).UnderlyingType;
+				if (arrayElement > biggestElement)
+				{
+					biggestElement = arrayElement;
+					bigElementIndex = i;
+				}
 			}
 
-			//use the converter to get the correct value
-			oProp.SetValue(target, Convert.ChangeType(propertyValue, tProp), null);
+			return bigElementIndex;
+		}
+
+		/// <summary>
+		/// Удаление элемента из массива по индексу
+		/// </summary>
+		/// <typeparam name="T">Тип массива</typeparam>
+		/// <param name="source">Исходный массив</param>
+		/// <param name="index">Индекс удаляемого элемента</param>
+		/// <returns>Выходной массив</returns>
+		private static int[] RemoveAt(this int[] source, int index)
+		{
+			int[] dest = new int[source.Length - 1];
+
+			dest = source.Where((val, idx) => idx != index).ToArray();
+
+			return dest;
 		}
 	}
 }

@@ -4,16 +4,21 @@
  * Designed by: Oleg Naraevskiy / noa.oleg96@gmail.com      [02.2022]
  *===================================================================*/
 
-using System;
-
-namespace SearchAlgorithms
+namespace SortingAlgorithms.Emuns
 {
-	public class BinarySearchAlg
+	/// <summary>
+	/// Способы сортировки
+	/// </summary>
+	public enum SortingEnum
 	{
-		public void SearchElement(int[] IntArray)
-		{
-			//int low, high = 0;
-			//var sortArray = IntArray.So
-		}
+		/// <summary>
+		/// По возрастанию
+		/// </summary>
+		Ascending = 0,
+
+		/// <summary>
+		/// По убыванию
+		/// </summary>
+		Descending = 1
 	}
 }

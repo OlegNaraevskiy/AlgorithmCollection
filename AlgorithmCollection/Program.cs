@@ -23,8 +23,8 @@ namespace AlgorithmCollection
 				
 				array[i] = rndInt;
 			}
-
-			var result = SelectionSorting.SortAsc(new SortingAlgorithms.Classes.NumericArrays());
+			int[] sourceArray = new int[10] { -4, 2, 1, 0, 8, -3, 12, 6, 3, 4 };
+			var result = SelectionSorting.Sort(sourceArray);
 
 			Console.WriteLine(String.Join(':', result));
 
